@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<!--<div class="flex flex-col h-screen">-->
+<!--	<div class="py-5 text-white text-3xl text-center" style="background:rgba(47, 146, 150, 1)">Bio Care-->
+<!--        <button id="dropdownDefault" style="background:rgba(223, 245, 242, 1)" data-dropdown-toggle="dropdown" class="float-right w-36 text-indigo-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Menu <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>-->
+<!--			<div id="dropdown" class="hidden grid grid-rows-2 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">-->
+<!--    	<ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">-->
+<!--        &lt;!&ndash; Dropdown menu &ndash;&gt;-->
+<!--            <a href="start" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Return to Start</a>-->
+<!--				<a href="logout" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>-->
+<!--    	</ul>-->
+<!--		</div>-->
+<!--	</div>-->
+
+<!--<form action="{% url 'doctor_email' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <div class="mt-4">-->
+<!--    <input type="text" name="title" placeholder="Enter Email Title" class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>-->
+<!--    <textarea name="message" rows="20" cols="30" placeholder="Enter the Message" class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"></textarea>-->
+<!--    <input type="hidden" name="patient" value="{{details}}"/>-->
+<!--    <input type="submit" value="Send Mail"/>-->
+<!--    </div>-->
+<!--</form>-->
+<!--</div>-->
+
+    <body class="h-screen">
+
+<div class="flex flex-col h-screen" >
+    <div class="static bg-cover w-screen h-screen md:-mx-4" style="background-image:url('/static/waves.jpg')"></div>
+
+	<div class="absolute top-0 left-0 py-5 w-screen text-3xl text-white text-center" style="background:rgba(47, 146, 150, 1)">Bio Care
+        <button id="dropdownDefault" style="background:rgba(223, 245, 242, 1);color:rgba(47, 146, 150, 1)" data-dropdown-toggle="dropdown" class="float-right w-36 text-indigo-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Menu <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+			<div id="dropdown" class="hidden grid grid-rows-2 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+    	<ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+        <!-- Dropdown menu -->
+            <a href="start" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Return to Start</a>
+				<a href="logout" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+    	</ul>
+		</div>
+	</div>
+
+
+<div class="absolute top-1/4 left-20 w-5/6 h-1/2" style="transform:translate(0%,0%)">
+<div>
+    <p style="color:rgba(47, 146, 150, 1)" class="text-4xl">Notification</p>
+</div>
+<form action="{% url 'add_daily' %}" method="post">
+{% csrf_token %}
+<!--<form action="{% url 'doctor_email' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <div class="mt-4">-->
+<!--    <input type="text" name="title" placeholder="Enter Email Title" class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>-->
+<!--    <textarea name="message" rows="20" cols="30" placeholder="Enter the Message" class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"></textarea>-->
+<!--    <input type="hidden" name="patient" value="{{details}}"/>-->
+<!--    <input type="submit" value="Send Mail"/>-->
+<!--    </div>-->
+<!--</form>-->
+    <div class="mt-4">
+                                <div class="text-sm font-bold text-xl text-gray-700 tracking-wide">Title</div>
+                                <input class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" name="title" type="text" placeholder="Enter the Heading" style="background:rgba(223, 245, 242, 1)">
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm font-bold text-xl text-gray-700 tracking-wide">
+                                        Body
+                                    </div>
+                                </div>
+                                <textarea name="message" rows="6" cols="50" class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="text" placeholder="Enter your Message" style="background:rgba(223, 245, 242, 1)"></textarea>
+                            </div>
+                            <div class="mt-6">
+                                <input style="background:rgba(47, 146, 150, 1);" type="submit" class="text-gray-100 p-4 w-1/5 rounded-full tracking-wide
+                                font-semibold font-display focus:outline-none focus:shadow-outline hover:shadow-xl shadow-inner" value="Send Mail"/>
+                            </div>
+
+
+    <input type="hidden" name="patient" value="{{details}}"/>
+</form>
+
+</div>
+</div>
+    </body>
+{% endblock %}

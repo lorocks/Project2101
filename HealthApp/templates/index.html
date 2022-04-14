@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% if message %}
+	<div>
+		{{ message }}
+	</div>
+{% endif %}
+{% if images %}
+	{% for img in images %}
+		<div>
+			{{img.username}}
+			<img src="{{img.img.url}}" width="300"/>
+		</div>
+	{% endfor %}
+{% endif %}
+<div class="absolute flex items-center justify-center" style="transform: translate(-100%, -100%); left:98%; top:5%;">
+<a href="logout" class="text-xl text-blue-600 hover:underline text-decoration-line: underline">Logout</a>
+</div>
+{% endblock %}

@@ -1,0 +1,208 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="flex flex-col h-screen">
+	<div class="py-5 text-3xl text-white text-center" style="background:rgba(47, 146, 150, 1)">Bio Care
+        <button id="dropdownDefault" style="background:rgba(223, 245, 242, 1);color:rgba(47, 146, 150, 1)" data-dropdown-toggle="dropdown" class="float-right w-36 text-indigo-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Menu <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+	<!-- Dropdown menu -->
+		<div id="dropdown" class="hidden grid grid-rows-2 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+    	<ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+			<a href="start" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Return to Start</a>
+			<form action="{% url 'redirect_add' %}" method="post">
+	  		{% csrf_token %}
+			<input type="submit" name="daily" value="Add Daily Data" class="bg-transparent z-10 w-36 block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"/>
+			<input type="submit" name="weekly" value="Add Weekly Data" class="bg-transparent z-10 w-36 block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"/>
+			<input type="hidden" name="patient" value="{{details}}"/>
+			</form>
+		<form action="{% url 'redirect_notify' %}" method="post">
+	  	{% csrf_token %}
+		<input type="submit" name="notify" value="Send Notification" class="bg-transparent w-36 block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"/>
+			<input type="hidden" name="patient" value="{{details}}"/>
+		</form>
+		<a href="logout" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+    	</ul>
+		</div>
+	</div>
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+	<main class="flex-1 overflow-y-auto p-5">
+		<div class="grid grid-cols-8 gap-8">
+{% if images %}
+	{% for img in images %}
+		{% if img.username == details.PatientID.username %}
+		<div class="col-span-2">
+			<img src="{{img.img.url}}" class="rounded-full" width="200"/>
+		</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+			<div class="flex flex-col justify-center text-3xl text-green-700 rounded-2xl col-span-2">
+				<div>Patient</div>
+				<div>{{ details.Name }}</div>
+			</div>
+{% if weekly %}
+			<div class="flex flex-col justify-center text-2xl text-green-700 rounded-2xl col-span-2">
+				<div>Sex: {{details.Gender}}</div>
+				<div>Age: {{details.Age}}</div>
+				<div>Blood Type: {{details.BloodType}}</div>
+			</div>
+	<div class="flex flex-col justify-center text-2xl text-green-700 rounded-2xl col-span-2">
+		<div>PatientID: {{ details.PatientID.username }}</div>
+		<div>Last Recorded Weight: {{ weekly.Weight }}</div>
+		<div>Last Recorded Height: {{ weekly.Height }}</div>
+		<div>BMI: {{ weekly.BMI }}</div>
+	</div>
+{% endif %}
+{% if daily %}
+			<div class="flex flex-col justify-center text-white items-center text-2xl py-8 rounded-2xl shadow-lg max-w-8" style="background:rgba(47, 146, 150, 1)">
+				<div>SPO2:</div>
+				<div>{{ daily.LastAvgOxygen }}</div>
+			</div>
+			<div class="flex flex-col py-8 rounded-2xl justify-center text-2xl text-white items-center shadow-lg" style="background:rgba(47, 146, 150, 1)">
+	<div>	BP: </div>
+			<div>	{{ daily.BloodPressure }}</div>
+	</div>
+			<div class="flex flex-col py-8 rounded-2xl justify-center text-2xl text-white items-center shadow-lg" style="background:rgba(47, 146, 150, 1)">
+	<div>	BPM:</div><div> {{ daily.LastAvgHeartRate }}</div>
+	</div>
+			<div  class="col-span-5">
+				{% endif %}
+{% if secondPulData %}
+				<div id="ChartPul">BPM Graph</div>
+	<canvas id="myChartPul" height="110" style="width:100%;max-width:1500px;"></canvas>
+{% endif %}
+</div>
+{% if daily %}
+	<div class="flex flex-col py-8 rounded-2xl justify-center text-2xl text-white items-center shadow-lg" style="background:rgba(47, 146, 150, 1)">
+	<div>	Temp:</div><div> {{ daily.LastAvgTemp }}</div>
+	</div >
+
+	<div class="flex flex-col py-8 rounded-2xl justify-center text-2xl text-white items-center shadow-lg" style="background:rgba(47, 146, 150, 1)">
+	<div>	Sugar:</div><div> {{ daily.BloodSugar }}</div>
+	</div>
+{% endif %}
+			{% for thing in conditions %}
+			{% if thing.username == details.PatientID.username %}
+			<div class="flex flex-col py-8 rounded-2xl justify-center text-2xl text-white items-center shadow-lg" style="background:rgba(47, 146, 150, 1)">
+				<div>Hypoxia: {{thing.Hypoxia}}</div>
+				<div>Diabetes: {{thing.DiabetesChance}}</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+<!--			change later-->
+			<div  class="col-span-5">
+{% if secondTempData %}
+				<div id="ChartTemp">Temperature Graph</div>
+	<canvas id="myChartTemp" height="110" style="width:100%;max-width:1500px;"></canvas>
+{% endif %}
+			</div>
+
+	<script>
+	window.showChart = 1;
+		function buttonClick() {
+			var x = document.getElementById("ChartPul");
+			if (x.style.display === "none") {
+    			x.style.display = "block";
+    			window.showChart = 1;
+  			} else {
+    			x.style.display = "none";
+    			window.showChart = 0;
+  			}
+  			var x = document.getElementById("ChartTemp");
+			if (x.style.display === "none") {
+    			x.style.display = "block";
+    			window.showChart = 1;
+  			} else {
+    			x.style.display = "none";
+    			window.showChart = 0;
+  			}
+  			var x = document.getElementById("myChartPul");
+			if (x.style.display === "none") {
+    			x.style.display = "block";
+    			window.showChart = 1;
+  			} else {
+    			x.style.display = "none";
+    			window.showChart = 0;
+  			}
+  			var x = document.getElementById("myChartTemp");
+			if (x.style.display === "none") {
+    			x.style.display = "block";
+    			window.showChart = 1;
+  			} else {
+    			x.style.display = "none";
+    			window.showChart = 0;
+  			}
+		}
+
+		var xValues = {{ timeData }};
+		var yValues = {{ secondTempData }};
+		if (xValues.length>0){
+		window.showChart = 1;
+		}
+		var xLabel = [];
+
+		new Chart("myChartTemp", {
+  			type: "line",
+  			data: {
+    			labels: xValues,
+    			datasets: [{
+      			fill: false,
+      			lineTension: 0,
+      			backgroundColor: "rgba(223, 245, 242, 1)",
+      			borderColor: "rgba(135, 223, 214, 1)",
+      			data: yValues
+    			}]
+  			},
+  			options: {
+    			legend: {display: false},
+    			scales: {
+      			yAxes: [{ticks: {min: 35, max:37}}],
+    			}
+  			}
+			});
+
+		var yValues = {{ secondPulData }};
+
+		new Chart("myChartPul", {
+  			type: "line",
+  			data: {
+    			labels: xValues,
+    			datasets: [{
+      			fill: false,
+      			lineTension: 0,
+      			backgroundColor: "rgba(223, 245, 242, 1)",
+      			borderColor: "rgba(135, 223, 214, 1)",
+      			data: yValues
+    			}]
+  			},
+  			options: {
+    			legend: {display: false},
+    			scales: {
+      			yAxes: [{ticks: {min: 60, max:120}}],
+    			}
+  			}
+			});
+		function reload() {
+			if (window.showChart == 1){
+  				document.location.reload();
+  			}
+		}
+
+		setTimeout(reload, 10000);
+	</script>
+
+		{% if timeData|length > 0 %}
+		<div>
+<button onclick="buttonClick()" style="background:rgba(70, 183, 185, 1);" class="text-gray-100 p-4 w-full rounded-full tracking-wide
+                                font-semibold font-display focus:outline-none focus:shadow-outline hover:shadow-xl shadow-inner">Show Chart</button>
+		{% endif %}
+</div>
+		</div>
+	</main>
+</div>
+
+
+{% endblock %}

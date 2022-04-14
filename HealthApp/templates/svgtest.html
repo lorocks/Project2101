@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<svg width="100%" height="100%" viewBox="0 0 280 280"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <style type="text/css"><![CDATA[
+    .heart {fill:red;stroke:black;stroke-width:0.5px;}
+    .vline {stroke:red;}
+  ]]>
+  </style>
+
+  <defs>
+    <symbol id="Heart" viewBox="0 0 280 270">
+      <path d="M140,58L140,267" class="vline" />
+      <path d="M140,58c30,-60,110,-60,130,0c30,100,-110,150,-130,210" />
+      <path d="M140,58c-30,-60,-110,-60,-130,0c-30,100,110,150,130,210" />
+    </symbol>
+  </defs>
+
+  <g transform="scale(1)" class="heart">
+    <g transform="translate(0,0)" class="h1">
+      <use x="0" y="0" width="280" height="270" xlink:href="#Heart" />
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="14 14" dur="0.8s" repeatCount="indefinite" />
+    </g>
+    <animateTransform attributeName="scale" type="translate" from="1" to="0.9" dur="0.8s" repeatCount="indefinite" />
+  </g>
+
+</svg>
+</body>
+</html>

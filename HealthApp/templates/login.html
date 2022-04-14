@@ -1,0 +1,251 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+<!--<meta charset="utf-8">-->
+<!--        <meta name="viewport" content="width=device-width">-->
+<!--        <title>Login Form</title>-->
+<!--        <link rel="stylesheet" href="/build/tailwind.css" type="text/css" media="screen" title="no title" charset="utf-8" />-->
+{% endblock %}
+
+{% block body %}
+<div class="lg:flex">
+            <div class="w-1/2 hidden lg:flex items-center justify-center flex-1 h-screen" style="background:rgba(73, 183, 185, 1);">
+                <div class="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
+                    <svg style="height: 245px; width: 245px; color: rgb(255, 255, 255);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16"> <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z" fill="#ffffff"></path> <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" fill="#ffffff"></path> </svg>
+                    <div class="mt-10 px-12 sm:px-8">
+                        <h2 class="text-center text-4xl text-white font-display font-semibold lg:text-left xl:text-5xl
+                    xl:text-bold">Bio Care</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/2 h-96">
+                <div class="bg-cover h-screen" style="background-image:url('/static/waves1.jpg')"></div>
+                {% if screen %}
+                    <div class="absolute min-h-1/2 justify-center items-center mt-10 w-96 px-8 py-6 mt-4 text-left bg-white shadow-lg" style="transform: translate(80%, -170%);">
+                {% else %}
+                    <div class="static top-28 left-2/3 min-h-1/2 justify-center items-center mt-10 w-96 px-8 py-6 mt-4 text-left bg-white shadow-lg" style="transform: translate(40%, -130%);">
+                {% endif %}
+
+                                <h2 class="text-center text-4xl text-green-900 font-display font-semibold lg:text-left xl:text-5xl
+                    xl:text-bold">Log in</h2>
+                    <div class="mt-12">
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            <div>
+                                {% if message %}
+                                    <span class="text-xs tracking-wide text-red-600">{{ message }} </span>
+                                {% endif %}
+                                <div class="text-sm font-bold text-xl text-gray-700 tracking-wide">Username</div>
+                                <input class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" name="username" type="text" placeholder="Enter your username">
+                            </div>
+                            <div class="mt-8">
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm font-bold text-xl text-gray-700 tracking-wide">
+                                        Password
+                                    </div>
+                                </div>
+                                <input name="password" class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="password" placeholder="Enter your password">
+                            </div>
+                            <div class="mt-10">
+                                <input style="background:rgba(47, 146, 150, 1);" type="submit" class="text-gray-100 p-4 w-full rounded-full tracking-wide
+                                font-semibold font-display focus:outline-none focus:shadow-outline hover:shadow-xl shadow-inner" value="Login"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!--<img class="object-cover" src="pic_trulli.jpg" alt="Italian Trulli">-->
+<!--<h1>Login</h1>-->
+<!--{% if message %}-->
+<!--    <div>-->
+<!--        {{ message }}-->
+<!--    </div>-->
+<!--{% endif %}-->
+<!--<form action="{% url 'login' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <input name="username" type="text" placeholder="Username"/>-->
+<!--    <input name="password" type="password" placeholder="Password"/>-->
+<!--    <input type="submit" value="Login"/>-->
+<!--</form>-->
+
+<!--works below code-->
+
+
+
+
+<!--<div class="bg-cover w-full h-screen md:-mx-4" style="filter: blur(6px); background-image:url('/static/doc.jpg')"></div>-->
+<!--<div class="absolute w-3/5 flex items-center justify-center min-h-screen" style="transform: translate(-50%, -50%); top:50%; left:50%">-->
+<!--&lt;!&ndash;<div class="flex items-center justify-center min-h-screen" >&ndash;&gt;-->
+<!--    <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">-->
+<!--        <div class="flex justify-center">-->
+<!--&lt;!&ndash;            <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 text-blue-600" fill="none" viewBox="0 0 24 24"&ndash;&gt;-->
+<!--&lt;!&ndash;                stroke="currentColor">&ndash;&gt;-->
+<!--&lt;!&ndash;                <path d="M12 14l9-5-9-5-9 5 9 5z" />&ndash;&gt;-->
+<!--&lt;!&ndash;                <path&ndash;&gt;-->
+<!--&lt;!&ndash;                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />&ndash;&gt;-->
+<!--&lt;!&ndash;                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"&ndash;&gt;-->
+<!--&lt;!&ndash;                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />&ndash;&gt;-->
+<!--&lt;!&ndash;            </svg>&ndash;&gt;-->
+<!--            <svg class="w-20 h-20 text-blue-600" fill="none" viewBox="0 0 280 280"-->
+<!--      xmlns="http://www.w3.org/2000/svg"-->
+<!--      xmlns:xlink="http://www.w3.org/1999/xlink">-->
+
+<!--  <style type="text/css"><![CDATA[-->
+<!--    .heart {fill:red;stroke:black;stroke-width:0.5px;}-->
+<!--    .vline {stroke:red;}-->
+
+<!--    .show {display:initial;}-->
+<!--    .hide {display:none;}-->
+
+<!--    .h1 {display:initial;}-->
+<!--    .h2 {display:none;}-->
+<!--  ]]>-->
+<!--  </style>-->
+
+<!--  <defs>-->
+<!--    <symbol id="Heart" viewBox="0 0 280 270">-->
+<!--      <path d="M140,58L140,267" class="vline" />-->
+<!--      <path d="M140,58c30,-60,110,-60,130,0c30,100,-110,150,-130,210" />-->
+<!--      <path d="M140,58c-30,-60,-110,-60,-130,0c-30,100,110,150,130,210" />-->
+<!--    </symbol>-->
+<!--  </defs>-->
+
+<!--  <g transform="translate(0,0) scale(1)" class="heart">-->
+<!--    <g class="h1">-->
+<!--      <use x="0" y="0" width="280" height="270" xlink:href="#Heart" />-->
+<!--      <animate attributeName="class" values="show;hide;" dur="1s" repeatCount="indefinite" />-->
+<!--    </g>-->
+<!--  </g>-->
+
+<!--  <g transform="translate(14,14) scale(0.9)" class="heart">-->
+<!--    <g class="h2">-->
+<!--      <use x="0" y="0" width="280" height="270" xlink:href="#Heart" />-->
+<!--      <animate attributeName="class" values="hide;show;" dur="1s" repeatCount="indefinite" />-->
+<!--    </g>-->
+<!--  </g>-->
+
+<!--</svg>-->
+
+
+<!--        </div>-->
+<!--        <h3 class="text-center text-4xl text-indigo-400 font-display font-semibold lg:text-left xl:text-2xl-->
+<!--                    xl:text-bold">Login to your account</h3>-->
+<!--        <form action="{% url 'login' %}" method="post">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="mt-4">-->
+<!--                <div>-->
+<!--                    {% if message %}-->
+<!--                    <span class="text-xs tracking-wide text-red-600">{{ message }} </span>-->
+<!--                    {% endif %}-->
+<!--                    <label class="block">Email</label>-->
+<!--                            <input name="username" type="text" placeholder="Username"-->
+<!--                                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">-->
+<!--                </div>-->
+<!--                <div class="mt-4">-->
+<!--                    <label class="block">Password</label>-->
+<!--                            <input name="password" type="password" placeholder="Password"-->
+<!--                                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">-->
+<!--                </div>-->
+<!--                <div class="flex items-baseline justify-between">-->
+<!--                    <input type="submit" class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900" value="Login"/>-->
+<!--&lt;!&ndash;                    <a href="#" class="text-sm text-blue-600 hover:underline">Forgot password?</a>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<!--works above code-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="flex items-center justify-center min-h-screen" >-->
+<!--    &lt;!&ndash;    <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">&ndash;&gt;-->
+<!--<div class="w-full h-screen md:-mx-4" style="filter: blur(6px); background-image:url('/static/doc.jpeg')"></div>this-->
+<!--      <div class="absolute w-3/5 bg-white" style="transform: translate(-50%, -50%); top:50%; left:50%">this-->
+<!--                    <div class="flex justify-center">-->
+<!--            <svg class="w-20 h-20 text-blue-600" fill="none" viewBox="0 0 280 280"-->
+<!--      xmlns="http://www.w3.org/2000/svg"-->
+<!--      xmlns:xlink="http://www.w3.org/1999/xlink">-->
+
+<!--  <style type="text/css"><![CDATA[-->
+<!--    .heart {fill:red;stroke:black;stroke-width:0.5px;}-->
+<!--    .vline {stroke:red;}-->
+
+<!--    .show {display:initial;}-->
+<!--    .hide {display:none;}-->
+
+<!--    .h1 {display:initial;}-->
+<!--    .h2 {display:none;}-->
+<!--  ]]>-->
+<!--  </style>-->
+
+<!--  <defs>-->
+<!--    <symbol id="Heart" viewBox="0 0 280 270">-->
+<!--      <path d="M140,58L140,267" class="vline" />-->
+<!--      <path d="M140,58c30,-60,110,-60,130,0c30,100,-110,150,-130,210" />-->
+<!--      <path d="M140,58c-30,-60,-110,-60,-130,0c-30,100,110,150,130,210" />-->
+<!--    </symbol>-->
+<!--  </defs>-->
+
+<!--  <g transform="translate(0,0) scale(1)" class="heart">-->
+<!--    <g class="h1">-->
+<!--      <use x="0" y="0" width="280" height="270" xlink:href="#Heart" />-->
+<!--      <animate attributeName="class" values="show;hide;" dur="1s" repeatCount="indefinite" />-->
+<!--    </g>-->
+<!--  </g>-->
+
+<!--  <g transform="translate(14,14) scale(0.9)" class="heart">-->
+<!--    <g class="h2">-->
+<!--      <use x="0" y="0" width="280" height="270" xlink:href="#Heart" />-->
+<!--      <animate attributeName="class" values="hide;show;" dur="1s" repeatCount="indefinite" />-->
+<!--    </g>-->
+<!--  </g>-->
+
+<!--</svg>-->
+<!--        </div>-->
+
+<!--                    <h3 class="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-2xl-->
+<!--                    xl:text-bold">Login to your account</h3>-->
+<!--        <form action="{% url 'login' %}" method="post">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="mt-4">-->
+<!--                <div>-->
+<!--                    {% if message %}-->
+<!--                    <span class="text-xs tracking-wide text-red-600">{{ message }} </span>-->
+<!--                    {% endif %}-->
+<!--                    <label class="block">Email</label>-->
+<!--                            <input name="username" type="text" placeholder="Username"-->
+<!--                                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">-->
+<!--                </div>-->
+<!--                <div class="mt-4">-->
+<!--                    <label class="block">Password</label>-->
+<!--                            <input name="password" type="password" placeholder="Password"-->
+<!--                                class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">-->
+<!--                </div>-->
+<!--                <div class="flex items-baseline justify-between">-->
+<!--                    <input type="submit" class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900" value="Login"/>-->
+<!--&lt;!&ndash;                    <a href="#" class="text-sm text-blue-600 hover:underline">Forgot password?</a>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+
+<!--        </div>-->
+<!--    </div>-->
+{% endblock %}
